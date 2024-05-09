@@ -1,1 +1,8 @@
-info:
+version: '3'
+services:
+  backend:
+    build: .
+    ports:
+      - "5001:5001"
+    volumes:
+      - .:/app
