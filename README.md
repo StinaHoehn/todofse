@@ -67,7 +67,7 @@ flowchart LR
 ---
 title: Todo anlegen
 ---
-flowchart LR
+flowchart TD
     Start
     Stop
     dashboard[Nutzer sieht Dashboard]
@@ -96,7 +96,7 @@ flowchart LR
 ---
 title: Termin anlegen
 ---
-flowchart LR
+flowchart TD
     Start
     Stop
     dashboard[Nutzer sieht Dashboard]
