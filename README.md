@@ -121,6 +121,35 @@ flowchart TD
     add-todo --> |fehlerhaft| form
 ```
 
+```mermaid
+---
+title: Passwort ändern
+---
+flowchart TD
+    Start
+    Stop
+    dashboard[Nutzer sieht Dashboard]
+    pb[Klick auf Profilbild oben rechts]
+    dropdown[Ein Dropdown-Menü öffnet sich]
+    pwaendern[Klick auf 'Passwort ändern']
+    neue-view[View mit drei Textfeldern öffnet sich]
+    old[Altes Passwort eingeben]
+    new[Zweimal neues Passwort eingeben]
+    button['Passwort ändern' drücken]
+    
+    Start --> dashboard
+    dashboard --> pb
+    pb --> dropdown
+    dropdown --> pwaendern
+    pwaendern --> neue-view
+    neue-view --> old
+    old --> new
+    new --> button
+    button --> |erfolgreich| Stop
+    button --> |falsches Passwort| old
+    button --> |Anforderungen nicht erfüllt| new
+```
+
 
 
 
