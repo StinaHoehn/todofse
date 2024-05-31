@@ -67,7 +67,7 @@ flowchart LR
 ---
 title: Todo anlegen
 ---
-flowchart TD
+flowchart LR
     Start
     Stop
     dashboard[Nutzer sieht Dashboard]
@@ -78,6 +78,35 @@ flowchart TD
     add[Klick auf 'Hinzufügen']
     form[Alle Felder ausfüllen]
     add-todo[Klick auf 'Todo hinzufügen']
+    
+    Start --> dashboard
+    dashboard --> widget
+    dashboard --> menu
+    menu --> todo-menu
+    widget --> todo-list
+    todo-menu --> todo-list
+    todo-list --> add
+    add --> form
+    form --> add-todo
+    add-todo -->|erfolgreich| Stop
+    add-todo --> |fehlerhaft| form
+```
+
+```mermaid
+---
+title: Termin anlegen
+---
+flowchart LR
+    Start
+    Stop
+    dashboard[Nutzer sieht Dashboard]
+    widget[Nutzer klickt Kalender-Widget]
+    menu[Nutzer öffnet Menü]
+    todo-menu[Klick auf 'Kalender'-Tab]
+    todo-list[Nutzer sieht große Monats-view des Kalenders]
+    add[Klick auf 'Hinzufügen']
+    form[Alle Felder ausfüllen]
+    add-todo[Klick auf 'Termin hinzufügen']
     
     Start --> dashboard
     dashboard --> widget
