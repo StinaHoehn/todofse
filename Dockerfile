@@ -4,7 +4,8 @@ FROM python:3.8
 # Arbeitsverzeichnis festlegen
 WORKDIR /app
 
-COPY requirements.txt ./
+# Kopieren der requirements.txt
+COPY requirements.txt .
 
 # Installieren der Abhängigkeiten
 RUN pip install --no-cache-dir -r requirements.txt
@@ -13,6 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Port freigeben
-EXPOSE 5001
+EXPOSE 5000
 
+# Startbefehl für die Flask-App
 CMD ["python", "app.py"]

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+</head>
+<body>
+    <h1>Welcome to the Todo App</h1>
+    <div style="margin: 20px;">
+        <input type="text" id="city-input" placeholder="Enter city" style="padding: 10px; font-size: 16px;">
+        <button onclick="updateWeather()" style="padding: 10px; font-size: 16px;">Get Weather</button>
+    </div>
+    <div id="weather-widget" class="mdl-card mdl-shadow--2dp" style="max-width: 300px; margin: 20px;">
+        <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text" id="weather-city">Loading...</h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+            <p id="weather-description">Please wait...</p>
+            <p id="weather-temperature"></p>
+            <p id="weather-icon"></p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchWeather('Berlin');
+        });
+
+        function fetchWeather(city) {
+            fetch(`http://localhost:5001/weather?city=${city}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.location) {
+                        document.getElementById('weather-city').textContent = data.location.name;
+                        document.getElementById('weather-description').textContent = data.current.condition.text;
+                        document.getElementById('weather-temperature').textContent = data.current.temp_c + ' °C';
+                        document.getElementById('weather-icon').innerHTML = `<img src="https:${data.current.condition.icon}" alt="Weather icon">`;
+                    } else {
+                        document.getElementById('weather-city').textContent = "Error";
+                        document.getElementById('weather-description').textContent = "Unable to fetch weather data.";
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching weather data:', error);
+                    document.getElementById('weather-city').textContent = "Error";
+                    document.getElementById('weather-description').textContent = "Unable to fetch weather data: " + error.message;
+                });
+        }
+
+        function updateWeather() {
+            const city = document.getElementById('city-input').value;
+            fetchWeather(city);
+        }
+    </script>
+</body>
+</html>
